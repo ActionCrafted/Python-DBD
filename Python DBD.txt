@@ -1,0 +1,180 @@
+import os
+import requests
+path = os.path.expandvars(r'%LOCALAPPDATA%')
+legacy = ''
+yourId = ''
+killerId = ''
+def addToClipBoard(text):
+    command = 'echo ' + text.strip() + '| clip'
+    os.system(command)
+def getKiller():
+    global label
+    global path
+
+    global legacy
+    global yourId
+    global isTwice
+    global killerID
+    isTwice = False
+
+    file = open(path + '\DeadByDaylight\Saved\Logs\DeadByDaylight.log', 'r')
+    try:
+        x = x1 = x2 = x3 = file.read()
+    except:
+        os.remove(path + '\DeadByDaylight\Saved\Logs\DeadByDaylight.log')
+    file.close()
+    x = x.split('Spawn new pawn characterId 2684354')
+    x1 = x1.split()
+    x1.reverse()
+
+    name = 'Killer Name:'
+
+    x2 = x2.split('LogOnline: Verbose: Mirrors: [FOnlineSessionMirrors::AddSessionPlayer] Session:GameSession ')
+
+    killer = str(x[len(x) - 1].split('.')[0])
+    yourId = (str(x2[len(x2) - 1].split('\n[')[0]))[46:]
+    verifyKiller = (((((str(x2[len(x2) - 1].split('GameFlow: Verbose:')[0]))[509:]).split('\n'))[0]).split('_'))[0]
+    try:
+        yourId2 = (str(x2[len(x2) - 2].split('\n[')[0]))[46:]
+        yourId3 = (str(x2[len(x2) - 3].split('\n[')[0]))[46:]
+        yourId4 = (str(x2[len(x2) - 4].split('\n[')[0]))[46:]
+        yourId5 = (str(x2[len(x2) - 5].split('\n[')[0]))[46:]
+        verifyKiller2 = (((((str(x2[len(x2) - 2].split('GameFlow: Verbose:')[0]))[509:]).split('\n'))[0]).split('_'))[0]
+        verifyKiller3 = (((((str(x2[len(x2) - 3].split('GameFlow: Verbose:')[0]))[509:]).split('\n'))[0]).split('_'))[0]
+        verifyKiller4 = (((((str(x2[len(x2) - 4].split('GameFlow: Verbose:')[0]))[509:]).split('\n'))[0]).split('_'))[0]
+        verifyKiller5 = (((((str(x2[len(x2) - 5].split('GameFlow: Verbose:')[0]))[509:]).split('\n'))[0]).split('_'))[0]
+    except:
+        pass
+
+    if killer == '56':
+            kname = legacy + 'Killer : Trapper'
+
+            count = 0
+            count2 = 0
+            for s in x1:
+                if (count2 < 3):
+                    if (s[:3] == 'TR_'):
+                        count2 = count2 + 1
+                    if (s[:3] == 'TR_' and s[len(s) - 4:len(s)] == 'LP01'):
+                        legacy = 'isLegacy: Yes \n'
+                        count = 1
+                    elif (s[:3] == 'TR_' and s[len(s) - 4:len(s)] != 'LP01' and (count == 0)):
+                        legacy = 'isLegacy: No \n'
+                else:
+                    break
+
+    elif killer == '57':
+
+            count = 0
+            count2 = 0
+            for s in x1:
+                if (count2 < 3):
+                    if (s[:3] == 'WR_'):
+                        count2 = count2 + 1
+                    if (s[:3] == 'WR_' and s[len(s) - 4:len(s)] == 'LP01'):
+                        legacy = 'isLegacy: Yes \n'
+                        count = 1
+                    elif (s[:3] == 'WR_' and s[len(s) - 4:len(s)] != 'LP01' and (count == 0)):
+                        legacy = 'isLegacy: No \n'
+                else:
+                    break
+            kname = legacy + 'Killer : Wraith'
+    elif killer == '58':
+
+            count = 0
+            count2 = 0
+            for s in x1:
+                if (count2 < 3):
+                    if (s[:3] == 'HB_'):
+                        count2 = count2 + 1
+                    if (s[:3] == 'HB_' and s[len(s) - 4:len(s)] == 'LP01'):
+                        legacy = 'isLegacy: Yes \n'
+                        count = 1
+                    elif (s[:3] == 'HB_' and s[len(s) - 4:len(s)] != 'LP01' and (count == 0)):
+                        legacy = 'isLegacy: No \n'
+                else:
+                    break
+            kname = legacy + 'Killer: Billy'
+    elif killer == '59':
+
+            count = 0
+            count2 = 0
+            for s in x1:
+                if (count2 < 3):
+                    if (s[:3] == 'NR_'):
+                        count2 = count2 + 1
+                    if (s[:3] == 'NR_' and s[len(s) - 4:len(s)] == 'LP01'):
+                        legacy = 'isLegacy: Yes \n'
+                        count = 1
+                    elif (s[:3] == 'NR_' and s[len(s) - 4:len(s)] != 'LP01' and (count == 0)):
+                        legacy = 'isLegacy: No \n'
+                else:
+                    break
+            kname = legacy + 'Killer : Nurse'
+    elif killer == '63':
+        kname = 'Killer : Huntress'
+    elif killer == '61':
+        kname = 'Killer : Myers'
+    elif killer == '60':
+        kname = 'Killer : The Hag'
+    elif killer == '62':
+        kname = 'Killer : Doctor'
+    elif killer == '65':
+        kname = 'Killer : Freddy'
+    elif killer == '64':
+        kname = 'Killer : Cannibal'
+    elif killer == '66':
+        kname = 'Killer : Pig'
+    elif killer == '67':
+        kname = 'Killer : Clown'
+    elif killer == '68':
+        kname = 'Killer : Spirit'
+    elif killer == '69':
+        kname = 'Killer : Legion'
+    elif killer == '70':
+        kname = 'Killer : Plague'
+    elif killer == '71':
+        kname = 'Killer: GhostFace'
+    elif killer == '72':
+        kname = 'Killer : Demogorgon'
+    elif killer == '73':
+        kname = 'Killer : Oni'
+    elif killer == '74':
+        kname = 'Killer : Deathslinger'
+
+    proxies = {
+        "http": None,
+        "https": None,
+    }
+    kS = ["GK", "CA", "QK", "DO", "SD", "OK", "BE", "WI", "UK", "TC", "KK", "MM", "TN", "FK", "MK", "HK",
+          "SwedenKiller", "TW", "TR"]
+    if True:
+        if (verifyKiller in kS):
+            isTwice = True
+        elif (verifyKiller2 in kS) and isTwice == False:
+            isTwice = True
+            yourId = yourId2
+        elif (verifyKiller3 in kS) and isTwice == False:
+            isTwice = True
+            yourId = yourId3
+        elif (verifyKiller4 in kS) and isTwice == False:
+            isTwice = True
+            yourId = yourId4
+        elif (verifyKiller5 in kS) and isTwice == False:
+            isTwice = True
+            yourId = yourId5
+        try:
+            r = requests.post('https://steamid.io/lookup/' + str(yourId), timeout=5,
+                              proxies=proxies)
+        except:
+            print('error')
+            return
+        name = r.text
+        name = name.split('"name": "')
+        fname = str(name[1]).split('"')
+        if isTwice == True:
+            addToClipBoard("https://steamcommunity.com/profiles/" + yourId)
+            print(kname + '\n' + yourId + '\n' + fname[0])
+            killerID = yourId
+        else:
+            print(kname + '\n' + 'No Name/SteamID')
